@@ -8,7 +8,7 @@
 	let isModalOpen = false;
 	let pickedColorText = 'none';
 	$: bodyBgColor = '';
-	$: bodyFontColor = 'hsl(0, 75%, 0%)';
+	$: bodyFontColor = '';
 
 	function setHue(colorItem, hue_i) {
 		if (hasHue) {
@@ -62,7 +62,12 @@
 	}}
 >
 	<button class="chooseColor" on:click={initPicker} on:keydown={initPicker}>
-		Choose background color
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+			<path
+				fill="currentColor"
+				d="M12 4.81V19c-3.31 0-6-2.63-6-5.87c0-1.56.62-3.03 1.75-4.14L12 4.81M6.35 7.56C4.9 8.99 4 10.96 4 13.13C4 17.48 7.58 21 12 21s8-3.52 8-7.87c0-2.17-.9-4.14-2.35-5.57L12 2L6.35 7.56z"
+			/>
+		</svg>
 	</button>
 	<p class="pickedColor">{bodyBgColor}</p>
 
@@ -90,10 +95,6 @@
 </div>
 
 <style>
-	:global(body) {
-		color: var(--bodyFontColor, #000);
-		background-color: var(--bodyBgColor, #fff);
-	}
 	.colorWrapper {
 		position: relative;
 		width: fit-content;
@@ -101,8 +102,9 @@
 	.chooseColor {
 		padding: 0.5rem;
 		font-size: 0.9rem;
-		border: 1px solid var(--bodyFontColor, #000);
-		color: var(--bodyFontColor, #000);
+		border: 1px solid var(--bodyFontColor);
+		border: none;
+		color: var(--bodyFontColor);
 		border-radius: 0.25rem;
 		background-color: transparent;
 		cursor: pointer;
@@ -110,15 +112,17 @@
 	.pickedColor {
 		position: absolute;
 		top: 1.5rem;
-		left: 0.25rem;
+		right: 0rem;
 		padding: 0.5rem;
 		font-size: 0.9rem;
+		white-space: nowrap;
 	}
 	.colorGrid {
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 30rem;
+		width: 25rem;
+		max-width: 99vw;
 		--font-color: #000;
 		display: grid;
 		grid-template-columns: repeat(10, 1fr);
@@ -146,11 +150,13 @@
 		padding-left: 0.5rem;
 		cursor: pointer;
 		color: var(--font-color);
-		transition: transform 100ms ease-in-out 0s, background-color 400ms linear 0s;
+		transition:
+			transform 100ms ease-in-out 0s,
+			background-color 400ms linear 0s;
 	}
-	.colorItem span {
+	/* .colorItem span {
 		pointer-events: none;
-	}
+	} */
 
 	.colorItem:hover {
 		transform: scale(1.1);

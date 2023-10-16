@@ -1,8 +1,9 @@
 <script>
-	import { slide, fade } from 'svelte/transition';
-	export let title;
+	import { slide } from 'svelte/transition';
 
+	export let title;
 	export let isOpen = false;
+
 	const toggle = () => (isOpen = !isOpen);
 
 	function fadeSlide(node, options) {
@@ -17,7 +18,7 @@
 	}
 </script>
 
-<button on:click={toggle} aria-expanded={isOpen}>
+<button on:click={toggle} aria-expanded={isOpen} class:isOpen>
 	<svg
 		style="tran"
 		width="20"
@@ -50,10 +51,17 @@
 		margin: 0;
 		margin-top: 1rem;
 		padding: 0;
+		background-color: var(--bodyBgColor);
+		width: 100%;
+		text-align: start;
+	}
+	button.isOpen {
+		position: -webkit-sticky;
+		position: sticky;
+		top: 85px;
 	}
 	div {
 		padding: 1rem;
-		padding-left: 2rem;
 	}
 
 	svg {

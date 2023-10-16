@@ -1,8 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
-	import { ColorTranslator, Harmony, Mix } from 'colortranslator';
+	import { ColorTranslator } from 'colortranslator';
 	import Accordion from './Accordion.svelte';
 	import { browser } from '$app/environment';
+
 	export let cssText = '';
 
 	$: Colors = [];
@@ -13,25 +14,20 @@
 		Colors = createColorGrid(cssText);
 	}
 
-	onMount(() => {
-		Colors = createColorGrid(cssText);
-	});
+	// onMount(() => {
+	// 	Colors = createColorGrid(cssText);
+	// });
 
 	function createColorGrid(cssText) {
 		const customColors = [];
 		const sheet = new CSSStyleSheet();
-		// add cssText to sheet
 		sheet.replaceSync(cssText);
-		// console.log('\nsheet', sheet);
 
 		for (const rule of sheet.cssRules) {
-			// console.log('rukle', rule);
 			if (rule instanceof CSSStyleRule) {
-				// console.log('rule', rule);
 				const ruleName = rule.selectorText;
 				const styles = [];
 				for (const declaration of rule.style) {
-					// console.log(declaration);
 					if (declaration.startsWith('--')) {
 						try {
 							const ct = new ColorTranslator(rule.style.getPropertyValue(declaration));
@@ -52,6 +48,10 @@
 							});
 						} catch (error) {
 							console.log('error', error);
+							console.log(
+								'rule.style.getPropertyValue(declaration)',
+								rule.style.getPropertyValue(declaration)
+							);
 						}
 					}
 				}
@@ -69,7 +69,7 @@
 </script>
 
 {#each Colors as rule}
-	<Accordion title={rule.name} isOpen>
+	<Accordion title={rule.name}>
 		<div class="grid-container">
 			{#each rule.styles as style}
 				<div class="grid-item" style="background-color: {style.value}; --color:{style.fontColor}">
@@ -85,8 +85,6 @@
 <style>
 	.grid-container {
 		display: grid;
-		/* margin-inline: auto; */
-		/* grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); */
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 10px;
 	}
