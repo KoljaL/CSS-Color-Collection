@@ -5,7 +5,7 @@ let dev = process.env.NODE_ENV === 'development';
 const config = {
 	kit: {
 		paths: {
-			// base: dev ? '' : '/LK-Blog-SvelteKit'
+			base: dev ? '' : '/CSS-Color-Collection'
 		},
 		adapter: adapter({
 			pages: 'docs',

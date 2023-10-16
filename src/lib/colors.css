@@ -1,12 +1,36 @@
 .TNG {
-	--tng-blsue: hsl(0, 100%, 93%);
-	--tng-blue: hsl(220, 60%, 50%);
-	--tng-blue-hover: hsl(220, 60%, 60%);
-	--tng-blue-visited: hsl(220, 60%, 40%);
-	--tng-blue-dark: hsl(231.4, 46.7%, 50%);
-	--tng-blue-grey: hsl(220, 50%, 60%);
-	--tng-red: hsl(8.6, 77.8%, 30%);
-	--tng-orange: hsl(18, 83.3%, 40%);
+	--tng-1: #ffff99;
+	--tng-2: #9999cc;
+	--tng-3: #6688cc;
+	--tng-4: #ccddff;
+	--tng-5: #ffcc66;
+	--tng-6: #9999ff;
+	--tng-7: #4455bb;
+	--tng-8: #5599ff;
+	--tng-9: #ff9933;
+	--tng-10: #cc99cc;
+	--tng-11: #9977aa;
+	--tng-12: #3366ff;
+	--tng-13: #664466;
+	--tng-14: #cc6699;
+	--tng-15: #774466;
+	--tng-16: #0011ee;
+	--tng-17: #cc99cc;
+	--tng-18: #cc6666;
+	--tng-19: #dd6644;
+	--tng-20: #000088;
+	--tng-21: #99ccff;
+	--tng-22: #ff9966;
+	--tng-23: #aa5533;
+	--tng-24: #bbaa55;
+	--tng-25: #3366cc;
+	--tng-26: #ff9900;
+	--tng-27: #bb6622;
+	--tng-28: #bb4411;
+	--tng-29: #006699;
+	--tng-30: #ffcc66;
+	--tng-31: #ee9955;
+	--tng-32: #882211;
 }
 .colors {
 	--yellow-light: hsl(39.1, 67.1%, 69%);

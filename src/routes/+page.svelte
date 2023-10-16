@@ -58,6 +58,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>ColorCollection</title>
+</svelte:head>
+
 <header class="first">
 	<h1 class="">ColorCollection</h1>
 	<ColorPickerAdvanced />
