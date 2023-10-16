@@ -14,7 +14,7 @@
 </svelte:head>
 
 <header class="firstAnimation">
-	<h1 class="">ColorCollectionAnimation</h1>
+	<h1 class="small">Color Collection Animation</h1>
 	<ColorPickerAdvanced />
 </header>
 
@@ -23,7 +23,7 @@
 		<CustomColors />
 	</Accordion>
 
-	<ColorGrid cssText={colors} />;
+	<ColorGrid cssText={colors} />
 </main>
 
 <style>
@@ -34,10 +34,16 @@
 		padding-bottom: 0.5rem;
 		display: flex;
 		flex-direction: row;
-		align-items: center;
+		align-items: top;
 		justify-content: space-between;
+		padding: 1rem;
 		z-index: 1;
 	}
+	h1 {
+		font-size: 2rem;
+		margin: 0;
+	}
+
 	main {
 		max-width: 99vw;
 		padding: 1rem;

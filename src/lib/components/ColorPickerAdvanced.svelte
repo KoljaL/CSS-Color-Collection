@@ -17,7 +17,7 @@
 			const light = colorItem.style.getPropertyValue('--light');
 			bodyBgColor = `hsl(${hue}, ${sat}, ${light})`;
 			document.body.style.setProperty('--bodyBgColor', bodyBgColor);
-			bodyFontColor = parseInt(light) > 50 ? '#000' : '#fff';
+			bodyFontColor = parseInt(light) > 50 ? '#222' : '#ddd';
 
 			document.body.style.setProperty('--bodyFontColor', bodyFontColor);
 			pickedColorText = `You have selected ${bodyBgColor}.`;
@@ -127,10 +127,10 @@
 		display: grid;
 		grid-template-columns: repeat(10, 1fr);
 		grid-gap: 0.5rem;
-		/* background-color: var(--bodyFontColor); */
-		/* border: 0.1px solid var(--bodyBgColor); */
-		background-color: #fff;
-		border: 1px solid #000;
+		background-color: var(--bodyBgColor);
+		border: 1px solid var(--bodyFontColor);
+		/* background-color: #fff; */
+		/* border: 1px solid #000; */
 		border-radius: 0.5rem;
 		padding: 0.5rem;
 	}

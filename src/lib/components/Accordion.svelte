@@ -27,12 +27,11 @@
 		stroke-linecap="round"
 		stroke-linejoin="round"
 		stroke-width="2"
-		viewBox="0 0 24 24"
+		viewBox="0 -4 24 24"
 		stroke="currentColor"
 	>
 		<path d="M9 5l7 7-7 7" />
-	</svg>
-	{title}
+	</svg>{title}
 </button>
 {#if isOpen}
 	<div transition:fadeSlide={{ duration: 300 }}>
@@ -46,19 +45,23 @@
 		background: none;
 		display: block;
 		color: inherit;
-		font-size: 36px;
+		font-size: 1.2rem;
 		cursor: pointer;
 		margin: 0;
 		margin-top: 1rem;
 		padding: 0;
+		padding-bottom: 0.5rem;
 		background-color: var(--bodyBgColor);
 		width: 100%;
 		text-align: start;
 	}
+	button:hover {
+		text-decoration: underline;
+	}
 	button.isOpen {
 		position: -webkit-sticky;
 		position: sticky;
-		top: 85px;
+		top: 75px;
 	}
 	div {
 		padding: 1rem;
