@@ -7,6 +7,10 @@
 	import Accordion from '../lib/components/Accordion.svelte';
 	import CustomColors from '../lib/components/CustomColors.svelte';
 	import ColorGrid from '../lib/components/ColorGrid.svelte';
+	import Expand from '../lib/icons/Expand.svelte';
+	let isOpen = false;
+	// $:
+	let isOpenCustom = true;
 </script>
 
 <svelte:head>
@@ -15,15 +19,20 @@
 
 <header class="firstAnimation">
 	<h1 class="small">Color Collection Animation</h1>
-	<ColorPickerAdvanced />
+	<div class="subHeader">
+		<button class="icon" on:click={() => ((isOpenCustom = !isOpen), (isOpen = !isOpen))}>
+			<Expand />
+		</button>
+		<ColorPickerAdvanced />
+	</div>
 </header>
 
 <main class="thirdAnimation">
-	<Accordion title="Custom Colors" isOpen={true}>
+	<Accordion title="Custom Colors" isOpen={isOpenCustom}>
 		<CustomColors />
 	</Accordion>
 
-	<ColorGrid cssText={colors} />
+	<ColorGrid cssText={colors} {isOpen} />
 </main>
 
 <style>
@@ -38,6 +47,12 @@
 		justify-content: space-between;
 		padding: 1rem;
 		z-index: 1;
+	}
+	.subHeader {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 1rem;
 	}
 	h1 {
 		font-size: 2rem;

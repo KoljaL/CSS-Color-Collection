@@ -3,16 +3,17 @@
 	import { ColorTranslator } from 'colortranslator';
 	import Accordion from './Accordion.svelte';
 	import { browser } from '$app/environment';
-
+	import Format from '$lib/icons/Format.svelte';
 	export let cssText = '';
 
 	$: Colors = [];
 
 	let fontColor = 'black';
-
+	let sheetRules = [];
 	$: if (cssText && browser) {
 		Colors = createColorGrid(cssText);
 	}
+	export let isOpen = false;
 
 	// onMount(() => {
 	// 	Colors = createColorGrid(cssText);
@@ -22,7 +23,8 @@
 		const customColors = [];
 		const sheet = new CSSStyleSheet();
 		sheet.replaceSync(cssText);
-
+		sheetRules.push(...sheet.cssRules);
+		console.log('sheetRules', sheetRules);
 		for (const rule of sheet.cssRules) {
 			if (rule instanceof CSSStyleRule) {
 				const ruleName = rule.selectorText;
@@ -64,12 +66,38 @@
 		return customColors;
 	}
 
+	function toggleColorFormat(e, i) {
+		const rule = sheetRules[i];
+		console.log('rule', rule);
+		const sccText = rule.cssText;
+		// copy to clipboard
+		navigator.clipboard.writeText(sccText);
+		// rule.styles.forEach((style) => {
+		// 	console.log('ct', style);
+		// 	const ct = new ColorTranslator(style.value);
+		// 	// const valueText = `#${ct.hex['r']}${ct.hex['g']}${ct.hex['b']}`;
+		// 	// style.valueText = valueText;
+		// });
+	}
+
 	// $: console.log('cssText', cssText);
 	// $: console.log('Colors', Colors);
 </script>
 
-{#each Colors as rule}
-	<Accordion title={rule.name}>
+{#each Colors as rule, index}
+	<Accordion title={rule.name} {isOpen}>
+		<!-- <div class="accordionHeader" slot="header">
+			<button
+			class="icon"
+				on:click={(e) => {
+					toggleColorFormat(e, index);
+				}}
+			>
+				<Format />
+			</button>
+			<button>2</button>
+			<button>3</button>
+		</div> -->
 		<div class="grid-container">
 			{#each rule.styles as style}
 				<div class="grid-item" style="background-color: {style.value}; --color:{style.fontColor}">
@@ -83,6 +111,16 @@
 {/each}
 
 <style>
+	.accordionHeader {
+		position: sticky;
+		display: flex;
+		flex-direction: row;
+		justify-content: end;
+		align-items: center;
+		gap: 1rem;
+		width: max-content;
+	}
+
 	.grid-container {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

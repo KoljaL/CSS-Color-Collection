@@ -34,6 +34,20 @@ body {
 button {
 	font-family: 'JetBrains Mono', sans-serif;
 }
+
+button.icon {
+	border: none;
+	background: none;
+	display: block;
+	color: inherit;
+	font-size: 1.2rem;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+	color: var(--bodyFontColor);
+	width: 100%;
+	text-align: start;
+}
 .firstAnimation,
 .secondAnimation,
 .thirdAnimation {

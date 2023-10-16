@@ -2,13 +2,24 @@
 	import ColorGrid from '$lib/components/ColorGrid.svelte';
 	import { ColorTranslator } from 'colortranslator';
 	import { onMount } from 'svelte';
-	$: customColors = `.myColors{\n\t--php: #4F5B93;\n\t--svelte: hsl(15, 100%, 50%);\n\t--laravel: rgb(249, 50, 44);\n\t--javascript: #f0db4f;\n\t--tailwind: rgb(14 165 233);\n\t--vue: #42b883;\n}\n`;
+
+	// get 	custom colors from local storage
+	let customColors;
+
+	onMount(() => {
+		if (localStorage.getItem('CSS-Color-Collection')) {
+			customColors = localStorage.getItem('CSS-Color-Collection');
+		} else {
+			customColors = `.myColors{\n\t--php: #4F5B93;\n\t--svelte: hsl(15, 100%, 50%);\n\t--laravel: rgb(249, 50, 44);\n\t--javascript: #f0db4f;\n\t--tailwind: rgb(14 165 233);\n\t--vue: #42b883;\n}\n`;
+		}
+		Colors = createColorGrid(customColors);
+	});
+	// save ciustom colors to local storage
+	// $: localStorage.setItem('customColors', customColors);
 	$: Colors = [];
 	let fontColor = 'black';
 
-	onMount(() => {
-		Colors = createColorGrid(customColors);
-	});
+	onMount(() => {});
 
 	function createColorGrid(cssText) {
 		const customColors = [];
@@ -59,6 +70,8 @@
 	function update(event) {
 		const rows = customColors.split(/\r\n|\r|\n/).length;
 		rowsTextarea = Math.ceil(rows / 5);
+		localStorage.setItem('CSS-Color-Collection', event.target.value);
+
 		Colors = createColorGrid(event.target.value);
 	}
 	let rowsTextarea = 2;
@@ -97,22 +110,19 @@
 	}
 
 	.grid-container {
-		margin-top: 2rem;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		grid-auto-rows: 100px;
-		/* grid-template-rows: auto; */
-		/* grid-auto-rows: minmax(100px, auto); */
 		grid-auto-flow: dense;
 		gap: 10px;
 	}
 
-	@media (max-width: 700px) {
+	@media (width < 690px) {
 		.grid-container {
-			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		}
 	}
-	@media (max-width: 550px) {
+	@media (width < 550px) {
 		.grid-container {
 			grid-template-columns: 1fr;
 		}

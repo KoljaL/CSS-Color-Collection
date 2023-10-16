@@ -1,8 +1,8 @@
 <script>
-	import { slide } from 'svelte/transition';
+	import { slide, fade } from 'svelte/transition';
 
 	export let title;
-	export let isOpen = false;
+	export let isOpen = true;
 
 	const toggle = () => (isOpen = !isOpen);
 
@@ -31,15 +31,32 @@
 		stroke="currentColor"
 	>
 		<path d="M9 5l7 7-7 7" />
-	</svg>{title}
+	</svg>
+	{title}
 </button>
 {#if isOpen}
-	<div transition:fadeSlide={{ duration: 300 }}>
+	<header in:fade={{ duration: 300, delay: 200 }} out:fade={{ duration: 100 }}>
+		<slot name="header" />
+	</header>
+{/if}
+{#if isOpen}
+	<div transition:fadeSlide={{ duration: 800, easing: 'linear' }}>
 		<slot />
 	</div>
 {/if}
 
 <style>
+	header {
+		position: relative;
+		top: -2.25rem;
+		right: 2rem;
+		height: 0;
+		/* border: 1px solid var(--bodyFontColor); */
+		display: flex;
+		flex-direction: row;
+		justify-content: end;
+		align-items: start;
+	}
 	button {
 		border: none;
 		background: none;
@@ -63,8 +80,14 @@
 		position: sticky;
 		top: 75px;
 	}
+	@media (width < 580px) {
+		button.isOpen {
+			top: 113px;
+		}
+	}
 	div {
-		padding: 1rem;
+		/* padding: 1rem; */
+		padding-block: 1rem;
 	}
 
 	svg {
